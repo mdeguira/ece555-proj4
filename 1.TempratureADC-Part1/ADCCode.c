@@ -21,14 +21,14 @@ void ADC0_Temp_Init(void){volatile uint32_t delay;
 		
 		
 	// Write proper value here
-  ADC0_PC_R &= ;
-  ADC0_PC_R |= ;             // 7) configure for 500K samples/sec
+  ADC0_PC_R &= ~0xF;
+  ADC0_PC_R |= 0x5;             // 7) configure for 500K samples/sec
 		
 		
 	
-  ADC0_SSPRI_R = ;        // 8) Sequencer 3 is highest priority
-  ADC0_ACTSS_R &= ;      // 9) disable sample sequencer 3
-  ADC0_EMUX_R &= ;       // 10) seq3 is software trigger
+  ADC0_SSPRI_R = 0x0123;        // 8) Sequencer 3 is highest priority
+  ADC0_ACTSS_R &= ~0x8;      // 9) disable sample sequencer 3
+  ADC0_EMUX_R &= ~0xF000;       // 10) seq3 is software trigger
 	
 	/*
 	  // No need to choose a channel since we are measuring temperature
@@ -52,10 +52,10 @@ void ADC0_Temp_Init(void){volatile uint32_t delay;
 // Output: 12-bit result of ADC conversion
 
 uint32_t ADC0_In(void){  uint32_t result;
-  // 1) initiate SS3
-  // 2) wait for conversion done
-  // 3) read result
-  // 4) acknowledge completion
+  ADC0_PSSI_R = 0x08; // 1) initiate SS3
+  while ((ADC0_PSSI_R & 0x08) == 0); // 2) wait for conversion done
+  result = ADC0_SSFIFO3_R & 0xFFF; // 3) read result
+  ADC0_ISC_R = 0x0008; // 4) acknowledge completion
 
   return result;
 

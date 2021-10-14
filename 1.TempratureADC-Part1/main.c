@@ -52,14 +52,25 @@ int main(void)
 	  ADC0_Temp_Init();							// Initialize ADC0 to take temperature readings
 		
     UART_printf("Initialization Complete..."); Newline();
-		UART_printf("Pressed C/c for Celsius or F/f for Fahrenhit"); Newline(); Newline();
+		UART_printf("Press C/c for Celsius or F/f for Fahrenhit"); Newline(); Newline();
     // Continually read and display the temperature
     while(1)
     {	
 				// Wait for user to enter a key
 				keystroke = Getchar();
-				
-        
+				if (keystroke == 'c' || keystroke == 'C') {
+					val = (unsigned long)Get_TempC;
+					UART_OutUDec(val);
+					Newline(); Newline();
+				}
+				else if (keystroke == 'f' || keystroke == 'F') {
+					val = (unsigned long)Get_TempC;
+					UART_OutUDec(Convert_C_To_F(val));
+					Newline(); Newline();
+				}
+				else { 
+					UART_printf("Press C/c for Celsius or F/f for Fahrenhit"); Newline(); Newline();
+				}
     }
 }
 
@@ -79,10 +90,13 @@ uint32_t Get_TempC(void){
 	// Read raw result from ADC0
 	// Try averaging multiple readings together to get more stable outputs
 	// Your code should come beneath 
-	
+	for (int i = 0; i < 20; i++) {
+		result += ADC0_In();
+	}
+	result /= 20;
 	
 	//Hard code ADC output as 1746 to generate 42C
-	result = 1746;       // Comment this line once you add your Averaging routine above
+	//result = 1746;       // Comment this line once you add your Averaging routine above
 	
 	// Convert raw ADC value to millivolts
 	result = Convert_Raw_To_V(result);
@@ -97,10 +111,10 @@ uint32_t Get_TempC(void){
 uint32_t Convert_Raw_To_V(uint32_t raw){
 	uint32_t result;
 	
-	// Convert raw ADC value to mV. 
+	// Convert raw ADC value t o mV. 
 	// voltage = max_possible_voltage * ADC_result / max_possible_ADC_value
-	// result = raw;
-	
+	// result = voltage;
+	result = 3300 * raw / 4095;
 	
 	
 	return result;
@@ -115,8 +129,7 @@ uint32_t Convert_V_To_C(uint32_t v){
    *
 	 * Voltage (mV) / 1000 = 2.7 - ((TempC + 55)/75)
 	 */
-	
-
+	result = (2.7 - (v / 1000)) * 75 - 55;
 	
 	return result;
 }
@@ -128,7 +141,7 @@ uint32_t Convert_C_To_F( uint32_t TempC)
 	
 	// complete this equation
 	// T in F = 32 + (T in C *1.8) 
-
+  TempF = 32 + (TempC * 1.8);
 	
 	return TempF;
 }
