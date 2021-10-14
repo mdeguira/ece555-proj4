@@ -42,6 +42,9 @@ void ADC0_InitSWTriggerSeq3_Ch1(void){volatile unsigned long delay;
   ADC0_SSMUX3_R += 1;           // 12) set channel to PE2
 
 	ADC0_SSCTL3_R = 0x0006;       // 13) no TS0 D0, yes IE0 END0
+	
+		ADC0_IM_R &= ~0x0008;
+		
 	ADC0_ACTSS_R |= 0x0008;       // 15) enable sample sequencer 3
 }
 
@@ -57,7 +60,7 @@ uint32_t ADC0_In(void){
   // 2) wait for conversion done
   // 3) read result
   // 4) acknowledge completion
-  ADC0_PSSI_R = 0x08; 								// 1) initiate SS3
+  ADC0_PSSI_R = 0x0008; 								// 1) initiate SS3
   while ((ADC0_PSSI_R & 0x08) == 0); 	// 2) wait for conversion done
   result = ADC0_SSFIFO3_R & 0xFFF; 		// 3) read result
   ADC0_ISC_R = 0x0008; 								// 4) acknowledge completion

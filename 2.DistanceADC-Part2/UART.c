@@ -30,8 +30,8 @@ void UART_Init(void){
 		
 	// Following values are given for 50M, 9600 baud
 	// change it to 50M, 115200 baud
-  UART0_IBRD_R = 325;                    // IBRD = int(50,000,000 / (16 * 9600)) = int(325.52)=325
-  UART0_FBRD_R = 33;                     // FBRD = int(0.52 * 64+0.5) = int(33.83) = 33
+  UART0_IBRD_R = 27;                    // IBRD = int(50,000,000 / (16 * 115200)) = int(27.73611)=27
+  UART0_FBRD_R = 33;                     // FBRD = int(0.73611 * 64+0.5) = round(8.1111) = 8
 		
 	
 		

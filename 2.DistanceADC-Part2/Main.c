@@ -31,12 +31,14 @@ int main(void){
 			// is "Flag" set?
             if (Flag == 1) {
 			// If yes then disable Flag and Print the Value using UART_printf
-			    Flag = 0;
-                String = ConvertDistanceostring(Distance) 
-                UART_printf(String);Newline();
+							Flag = 0;
+							ConvertDistancetostring(Distance);
+              UART_printf(String);
+							Newline();
 			
-	}
+						}
 	
+	}
 }
 /*------------Students written Function--------------------*/
 
@@ -52,7 +54,7 @@ unsigned long Convert(unsigned long sample){
 	// (samples/4095) * size
 	// Multiply above value to convert to fixed value
 	// "Size" is global variable, for my case its 2 as the length of the Potentiometer is 2 CM, changed it if required
-    return (sample/4095 * size);
+    return (sample/4095 * Size);
 }
 
 // Initialize SysTick interrupts to trigger at 40 Hz, 25 ms
@@ -68,7 +70,7 @@ void SysTick_Init_Interrupts(unsigned long period){
 }
 // executes every 25 ms, collects a sample, converts and stores in mailbox
 void SysTick_Handler(void){ 
-    sample = ADC0_In(); // Reads ADC & store in mailbox w/ flag
+    unsigned int sample = ADC0_In(); // Reads ADC & store in mailbox w/ flag
 	Distance = Convert(sample);// "Distance" is global varaible
 	// Use the handler to read ADC value, then Conver () function and finally converting values using pre-written ConvertDistancetostring
 	 
