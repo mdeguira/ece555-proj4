@@ -1090,10 +1090,10 @@ ARM Macro Assembler    Page 17
               00000400 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4 --apcs=interw
-ork --depend=.\objects\startup.d -o.\objects\startup.o -I.\RTE\_Target_1 -IC:\K
-eil_v5\ARM\PACK\ARM\CMSIS\5.4.0\Device\ARM\ARMCM4\Include -IC:\Keil_v5\ARM\CMSI
-S\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 527" 
---predefine="ARMCM4 SETA 1" --list=.\listings\startup.lst startup.s
+ork --depend=.\objects\startup.d -o.\objects\startup.o -I.\RTE\_Target_1 -ID:\C
+S\Arm\Packs\ARM\CMSIS\5.8.0\Device\ARM\ARMCM4\Include -ID:\CS\Keil_v5\ARM\CMSIS
+\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 529" -
+-predefine="ARMCM4 SETA 1" --list=.\listings\startup.lst startup.s
 
 
 
