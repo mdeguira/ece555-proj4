@@ -25,12 +25,15 @@ int main(void){
 	PLL_Init();                           // PLL at 50 Mhz, no need to change
 	UART_Init();													// UART Init  -  Check IBRD and FBRD
 	ADC0_InitSWTriggerSeq3_Ch1();					// ADC initialization PE2/AIN1
-	SysTick_Init_Interrupts(2000000);			// Pass the proper value such that we get Interrupt at every 500ms
+	SysTick_Init_Interrupts(25000000);			// Pass the proper value such that we get Interrupt at every 500ms
 	
 	while(1){
 			// is "Flag" set?
+            if (Flag == 1) {
 			// If yes then disable Flag and Print the Value using UART_printf
-			UART_printf(String);Newline();
+			    Flag = 0;
+                String = ConvertDistanceostring(Distance) 
+                UART_printf(String);Newline();
 			
 	}
 	
@@ -49,7 +52,7 @@ unsigned long Convert(unsigned long sample){
 	// (samples/4095) * size
 	// Multiply above value to convert to fixed value
 	// "Size" is global variable, for my case its 2 as the length of the Potentiometer is 2 CM, changed it if required
-	
+    return (sample/4095 * size);
 }
 
 // Initialize SysTick interrupts to trigger at 40 Hz, 25 ms
@@ -57,16 +60,16 @@ void SysTick_Init_Interrupts(unsigned long period){
 	// Initialize SysTick interrupts
 	// Input: 32bit desired reload value
 	
-	// disable systick
-	// reload value
-	// clear flag
+    NVIC_ST_CTRL_R = 0; // disable systick
+	NVIC_ST_RELOAD_R = period - 1; // reload value
+	NVIC_ST_CURRENT_R = 0; // clear flag
 	NVIC_SYS_PRI3_R = (NVIC_SYS_PRI3_R&0x00FFFFFF)|0x40000000; // set priority
-	// enable systick
+	NVIC_ST_CTRL_R = 0x07; // enable systick
 }
 // executes every 25 ms, collects a sample, converts and stores in mailbox
 void SysTick_Handler(void){ 
-	// Reads ADC & store in mailbox w/ flag
-	// "Distance" is global varaible
+    sample = ADC0_In(); // Reads ADC & store in mailbox w/ flag
+	Distance = Convert(sample);// "Distance" is global varaible
 	// Use the handler to read ADC value, then Conver () function and finally converting values using pre-written ConvertDistancetostring
 	 
 	Flag = 1;           // Setting global Flag when existing
