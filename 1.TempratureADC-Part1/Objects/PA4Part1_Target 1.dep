@@ -1,0 +1,17 @@
+Dependencies for Project 'PA4Part1', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 5060960::V5.06 update 7 (build 960)::ARMCC
+F (.\main.c)(0x61689581)(--c99 -c --cpu Cortex-M4 -D__EVAL --li -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-ID:\CS\Arm\Packs\ARM\CMSIS\5.8.0\Device\ARM\ARMCM4\Include-ID:\CS\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DARMCM4-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (D:\CS\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025CC3C)
+I (D:\CS\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025CC3E)
+I (ADCCode.h)(0x61688D9C)
+I (UART.h)(0x61688D9C)
+I (tm4c123gh6pm.h)(0x61688D9C)
+F (.\ADCCode.c)(0x61689720)(--c99 -c --cpu Cortex-M4 -D__EVAL --li -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-ID:\CS\Arm\Packs\ARM\CMSIS\5.8.0\Device\ARM\ARMCM4\Include-ID:\CS\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DARMCM4-o .\objects\adccode.o --omf_browse .\objects\adccode.crf --depend .\objects\adccode.d)
+I (D:\CS\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025CC3E)
+I (ADCCode.h)(0x61688D9C)
+I (tm4c123gh6pm.h)(0x61688D9C)
+F (.\UART.c)(0x61688D9C)(--c99 -c --cpu Cortex-M4 -D__EVAL --li -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-ID:\CS\Arm\Packs\ARM\CMSIS\5.8.0\Device\ARM\ARMCM4\Include-ID:\CS\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DARMCM4-o .\objects\uart.o --omf_browse .\objects\uart.crf --depend .\objects\uart.d)
+I (D:\CS\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025CC3E)
+I (UART.h)(0x61688D9C)
+I (tm4c123gh6pm.h)(0x61688D9C)
+F (.\startup.s)(0x61688D9C)(--cpu Cortex-M4 --li --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_Target_1-ID:\CS\Arm\Packs\ARM\CMSIS\5.8.0\Device\ARM\ARMCM4\Include-ID:\CS\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 529" --pd "ARMCM4 SETA 1"--list .\listings\startup.lst --xref -o .\objects\startup.o --depend .\objects\startup.d)

@@ -13,21 +13,20 @@ void ADC0_Temp_Init(void){volatile uint32_t delay;
     GPIO_PORTE_AFSEL_R |= 0x10; // 3) enable alternate function on PE4
     GPIO_PORTE_DEN_R &= ~0x10;  // 4) disable digital I/O on PE4
     GPIO_PORTE_AMSEL_R |= 0x10; // 5) enable analog functionality on PE4
-	  
-		*/
+	  */
+		
 	
 	SYSCTL_RCGCADC_R |= 0x0001;   // 6) activate ADC0 and allow time to stabilize
-	while((SYSCTL_RCGCADC_R&0x1)==0){}
-		
+	while((SYSCTL_RCGCADC_R&0x1)!=0x01){}
+	
 		
 	// Write proper value here
-  ADC0_PC_R &= ~0xF;
-  ADC0_PC_R |= 0x5;             // 7) configure for 500K samples/sec
-		
+	ADC0_PC_R &= ~0xF;
+  ADC0_PC_R |= 0x2;             // 7) configure for 500K samples/sec
 		
 	
   ADC0_SSPRI_R = 0x0123;        // 8) Sequencer 3 is highest priority
-  ADC0_ACTSS_R &= ~0x8;      // 9) disable sample sequencer 3
+  ADC0_ACTSS_R &= ~0x8;      		// 9) disable sample sequencer 3
   ADC0_EMUX_R &= ~0xF000;       // 10) seq3 is software trigger
 	
 	/*
