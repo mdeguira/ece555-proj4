@@ -139,7 +139,7 @@ Removing Unused input sections from the image.
 
     Removing main.o(i.Convert), (4 bytes).
     Removing main.o(i.ConvertDistancetostring), (100 bytes).
-    Removing adccode.o(i.ADC0_In), (2 bytes).
+    Removing adccode.o(i.ADC0_In), (44 bytes).
     Removing uart.o(i.Getchar), (28 bytes).
     Removing uart.o(i.UART_InString), (66 bytes).
     Removing uart.o(i.UART_InUDec), (76 bytes).
@@ -147,7 +147,7 @@ Removing Unused input sections from the image.
     Removing uart.o(i.UART_OutUDec), (42 bytes).
     Removing uart.o(i.UART_OutUHex), (52 bytes).
 
-9 unused section(s) (total 474 bytes) removed from the image.
+9 unused section(s) (total 516 bytes) removed from the image.
 
 ==============================================================================
 

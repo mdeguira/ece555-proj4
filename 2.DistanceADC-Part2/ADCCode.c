@@ -51,11 +51,16 @@ void ADC0_InitSWTriggerSeq3_Ch1(void){volatile unsigned long delay;
 // Input: none
 // Output: 12-bit result of ADC conversion
 
-uint32_t ADC0_In(void){  uint32_t result;
+uint32_t ADC0_In(void){  
+	uint32_t result;
   // 1) initiate SS3
   // 2) wait for conversion done
   // 3) read result
   // 4) acknowledge completion
+  ADC0_PSSI_R = 0x08; 								// 1) initiate SS3
+  while ((ADC0_PSSI_R & 0x08) == 0); 	// 2) wait for conversion done
+  result = ADC0_SSFIFO3_R & 0xFFF; 		// 3) read result
+  ADC0_ISC_R = 0x0008; 								// 4) acknowledge completion
 
   return result;
 
