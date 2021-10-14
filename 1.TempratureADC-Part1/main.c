@@ -114,7 +114,7 @@ uint32_t Convert_Raw_To_V(uint32_t raw){
 	// Convert raw ADC value t o mV. 
 	// voltage = max_possible_voltage * ADC_result / max_possible_ADC_value
 	// result = voltage;
-	result = 3300 * raw / 4095;
+	result = 3000 * raw / 4095;
 	
 	
 	return result;
